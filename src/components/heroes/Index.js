@@ -22,22 +22,28 @@ class HeroesIndex extends React.Component {
       <section className="section">
         <div className="container">
           <div className="columns is-multiline">
-            {this.state.heroes.map(hero =>
-              <div
-                key={hero.id}
-                className="column is-half-tablet is-one-quarter-desktop"
-              >
-                <Link to={`/heroes/${hero.id}`}>
-                  <Card
-                    name={hero.name}
-                    image={hero.images.lg}
-                    publisher={hero.biography.publisher}
-                    alignment={hero.biography.alignment}
-                  />
-                </Link>
+            <div className="column is-one-fifth">
+            </div>
+            <div className="column is-four-fifths">
+              <div className="columns is-multiline">
+                {this.state.heroes.map(hero =>
+                  <div
+                    key={hero.id}
+                    className="column is-one-third-desktop"
+                  >
+                    <Link to={`/heroes/${hero.id}`}>
+                      <Card
+                        name={hero.name}
+                        image={hero.images.lg}
+                        publisher={hero.biography.publisher}
+                        alignment={hero.biography.alignment}
+                      />
+                    </Link>
 
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
