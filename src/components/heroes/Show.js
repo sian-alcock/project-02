@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import _ from 'lodash'
 
 import { Link } from 'react-router-dom'
 
@@ -83,7 +84,7 @@ class HeroShow extends React.Component {
                 </p>
                 <p><strong>Publisher: </strong>{this.state.hero.biography.publisher}
                 </p>
-                <p><strong>Alignment: </strong>{this.state.hero.biography.alignment}
+                <p><strong>Alignment: </strong>{_.startCase(this.state.hero.biography.alignment)}
                 </p>
               </div>
             </article>

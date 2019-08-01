@@ -13,7 +13,12 @@ const Card = (props) => {
       <div className="card-content">
         <p className="notes">{props.publisher}</p>
         <p className="notes">{props.alignment}</p>
-
+        <p className="notes"><strong>Intelligence:</strong> {props.intelligence}</p>
+        <p className="notes"><strong>Strength:</strong> {props.strength}</p>
+        <p className="notes"><strong>Speed:</strong> {props.speed}</p>
+        <p className="notes"><strong>Durability:</strong> {props.durability}</p>
+        <p className="notes"><strong>Power:</strong> {props.power}</p>
+        <p className="notes"><strong>Combat:</strong> {props.combat}</p>
       </div>
     </div>
   )

@@ -26,18 +26,24 @@ class HeroesIndex extends React.Component {
     this.handleMarvelComics = this.handleMarvelComics.bind(this)
     this.handleHuman = this.handleHuman.bind(this)
     this.handleMale = this.handleMale.bind(this)
+    this.handleGroupFilter = this.handleGroupFilter.bind(this)
 
 
   }
 
   componentDidMount() {
     axios.get('https://akabab.github.io/superhero-api/api/all.json')
-      .then(res => this.setState({ heroes: res.data }))
+      .then(res => this.setState({ heroes: res.data, filteredHeroes: res.data }))
 
+
+    const searchString = this.props.location.search.replace('?','').replace('%20', ' ')
+    console.log(searchString)
+    this.handleGroupFilter(searchString)
+
+
+    //if the url contains a parameter, then grab the parameter and pass it to the filterByGroup function, otherwise ??
   }
-  // componentDidUpdate(){
-  //   this.setState({filteredHeroes: this.state.heroes})
-  // }
+
 
   handleFemale() {
     const filter = _.filter(this.state.heroes, hero => {
@@ -88,12 +94,24 @@ class HeroesIndex extends React.Component {
     this.applySort(filter)
   }
 
+  handleGroupFilter(group) {
+    const filter = _.filter(this.state.heroes, hero => {
+      return hero.connections.groupAffiliation.includes(group)
+    })
+    console.log('handleGroupFilter is being called')
+    console.log(filter)
+    this.setState({filteredHeroes: filter})
+    console.log(this.filteredHeroes)
+    this.applySort(filter)
+  }
+
   handleChange(e) {
     this.setState({ sortTerm: e.target.value })
     this.applySort(this.state.filteredHeroes)
   }
 
   handleKeyUp(e) {
+    this.setState({ searchTerm: e.target.value })
     const re = new RegExp(e.target.value, 'i')
     const filter = _.filter(this.state.heroes, hero => {
       return re.test(hero.name)
@@ -118,7 +136,7 @@ class HeroesIndex extends React.Component {
 
               <div className="field">
                 <div className="control">
-                  <input className="input" type="text" placeholder="search..." onKeyUp={this.handleKeyUp}/>
+                  <input id="search" className="input" type="text" placeholder="search..." onKeyUp={this.handleKeyUp}/>
                 </div>
               </div>
 
@@ -175,7 +193,7 @@ class HeroesIndex extends React.Component {
                         name={hero.name}
                         image={hero.images.lg}
                         publisher={hero.biography.publisher}
-                        alignment={hero.biography.alignment}
+                        alignment={_.startCase(hero.biography.alignment)}
                       />
                     </Link>
 
