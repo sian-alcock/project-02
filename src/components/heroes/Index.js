@@ -26,18 +26,23 @@ class HeroesIndex extends React.Component {
     this.handleMarvelComics = this.handleMarvelComics.bind(this)
     this.handleHuman = this.handleHuman.bind(this)
     this.handleMale = this.handleMale.bind(this)
+
+
   }
 
   componentDidMount() {
     axios.get('https://akabab.github.io/superhero-api/api/all.json')
       .then(res => this.setState({ heroes: res.data }))
+
   }
+  // componentDidUpdate(){
+  //   this.setState({filteredHeroes: this.state.heroes})
+  // }
 
   handleFemale() {
     const filter = _.filter(this.state.heroes, hero => {
       return hero.appearance.gender === 'Female'
     })
-    this.setState({filteredHeroes: filter})
     this.applySort(filter)
   }
 
@@ -45,7 +50,6 @@ class HeroesIndex extends React.Component {
     const filter = _.filter(this.state.heroes, hero => {
       return hero.appearance.gender === 'Male'
     })
-    this.setState({filteredHeroes: filter})
     this.applySort(filter)
   }
 
@@ -53,7 +57,6 @@ class HeroesIndex extends React.Component {
     const filter = _.filter(this.state.heroes, hero => {
       return hero.biography.alignment === 'good'
     })
-    this.setState({filteredHeroes: filter})
     this.applySort(filter)
   }
 
@@ -61,7 +64,6 @@ class HeroesIndex extends React.Component {
     const filter = _.filter(this.state.heroes, hero => {
       return hero.biography.alignment === 'bad'
     })
-    this.setState({filteredHeroes: filter})
     this.applySort(filter)
   }
 
@@ -69,7 +71,6 @@ class HeroesIndex extends React.Component {
     const filter = _.filter(this.state.heroes, hero => {
       return hero.biography.publisher === 'Marvel Comics'
     })
-    this.setState({filteredHeroes: filter})
     this.applySort(filter)
   }
 
@@ -77,7 +78,6 @@ class HeroesIndex extends React.Component {
     const filter = _.filter(this.state.heroes, hero => {
       return hero.biography.publisher === 'DC Comics'
     })
-    this.setState({filteredHeroes: filter})
     this.applySort(filter)
   }
 
@@ -85,12 +85,12 @@ class HeroesIndex extends React.Component {
     const filter = _.filter(this.state.heroes, hero => {
       return hero.appearance.race === 'Human'
     })
-    this.setState({filteredHeroes: filter})
     this.applySort(filter)
   }
 
   handleChange(e) {
     this.setState({ sortTerm: e.target.value })
+    this.applySort(this.state.filteredHeroes)
   }
 
   handleKeyUp(e) {
@@ -105,7 +105,7 @@ class HeroesIndex extends React.Component {
   applySort(filteredHeroes) {
     const [field, order] = this.state.sortTerm.split('|')
     const sortedHeroes = _.orderBy(filteredHeroes, [field], [order])
-    return sortedHeroes
+    this.setState({filteredHeroes: sortedHeroes})
   }
 
   render() {
@@ -165,7 +165,7 @@ class HeroesIndex extends React.Component {
             </div>
             <div className="column is-four-fifths">
               <div className="columns is-multiline">
-                {this.applySort(this.state.filteredHeroes).map(hero =>
+                {this.state.filteredHeroes.map(hero =>
                   <div
                     key={hero.id}
                     className="column is-one-third-desktop is-half-tablet"
