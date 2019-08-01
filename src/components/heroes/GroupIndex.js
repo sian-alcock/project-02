@@ -1,9 +1,13 @@
-import React from 'react'
+
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import _ from 'lodash'
+import Select from 'react-select'
 
-import Card from './Card'
+
+
+
+
 
 class GroupIndex extends React.Component {
   constructor() {
@@ -11,8 +15,10 @@ class GroupIndex extends React.Component {
 
     this.state = {
       heroes: [],
+      options: [],
       groups: []
     }
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   componentDidMount() {
@@ -33,17 +39,35 @@ class GroupIndex extends React.Component {
           .sort()
 
         groups = Array.from(new Set(groups))
-        this.setState({ heroes: res.data, groups })
+
+        const objectGroups =groups.map(group => ({value: group, label: group}))
+        console.log(objectGroups)
+
+        const options = [
+          {value: 'chocolate', label: 'x'},
+          {value: 'strawberry', label: 'x'},
+          {value: 'Vanilla', label: 'x'}
+        ]
+
+        this.setState({ heroes: res.data, groups, objectGroups })
       })
   }
 
 
+
+  handleSelect(e) {
+    console.log(e.value)
+  }
+
   render() {
     if(!this.state.heroes) return <h2>Loading...</h2>
+
+
     console.log(this.state.groups)
     return(
       <section className="section">
         <div className="container">
+          <Select onChange={this.handleSelect} options={this.state.objectGroups} />
           <div className="columns is-multiline">
             {this.state.groups.map((group, index) =>
               <div

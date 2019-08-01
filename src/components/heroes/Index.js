@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import _ from 'lodash'
+import Select from 'react-select'
 
 import Card from './Card'
 
@@ -18,85 +19,49 @@ class HeroesIndex extends React.Component {
 
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.handleFemale = this.handleFemale.bind(this)
-    this.handleMale = this.handleMale.bind(this)
-    this.handleGood = this.handleGood.bind(this)
-    this.handleBad = this.handleBad.bind(this)
-    this.handleDcComics = this.handleDcComics.bind(this)
-    this.handleMarvelComics = this.handleMarvelComics.bind(this)
-    this.handleHuman = this.handleHuman.bind(this)
-    this.handleMale = this.handleMale.bind(this)
-    this.handleGroupFilter = this.handleGroupFilter.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
+    this.handleFilters = this.handleFilters.bind(this)
 
 
   }
 
   componentDidMount() {
     axios.get('https://akabab.github.io/superhero-api/api/all.json')
-      .then(res => this.setState({ heroes: res.data, filteredHeroes: res.data }))
+      .then(res => {
+        let groups = res.data.map(hero => {
+          return hero.connections.groupAffiliation.split(', ')
+            .map(group => {
+              group = group.replace('Former', 'former')
+                .replace('Incorporated', 'Inc.')
+              const match = group.match(/[A-Z][a-zA-Z0-9 .-]+/)
+              return match ? match[0].trim() : group
+            })
+        })
+          .reduce((flattened, groupArray) => flattened.concat(groupArray), [])
+          .filter(group => group.length < 50 && group !== '-')
+          .sort()
 
+        groups = Array.from(new Set(groups))
 
-    const searchString = this.props.location.search.replace('?','').replace('%20', ' ')
-    console.log(searchString)
-    this.handleGroupFilter(searchString)
+        const objectGroups =groups.map(group => ({value: group, label: group}))
+        console.log(objectGroups)
 
-
-    //if the url contains a parameter, then grab the parameter and pass it to the filterByGroup function, otherwise ??
+        this.setState({ heroes: res.data, filteredHeroes: res.data, groups, objectGroups })
+      })
   }
 
 
-  handleFemale() {
+  handleFilters(e) {
+    const [fieldOne, fieldTwo, value] = e.target.value.split('|')
     const filter = _.filter(this.state.heroes, hero => {
-      return hero.appearance.gender === 'Female'
+      return hero[fieldOne][fieldTwo] === value
     })
     this.applySort(filter)
   }
 
-  handleMale() {
+  handleSelect(e) {
     const filter = _.filter(this.state.heroes, hero => {
-      return hero.appearance.gender === 'Male'
-    })
-    this.applySort(filter)
-  }
-
-  handleGood() {
-    const filter = _.filter(this.state.heroes, hero => {
-      return hero.biography.alignment === 'good'
-    })
-    this.applySort(filter)
-  }
-
-  handleBad() {
-    const filter = _.filter(this.state.heroes, hero => {
-      return hero.biography.alignment === 'bad'
-    })
-    this.applySort(filter)
-  }
-
-  handleMarvelComics() {
-    const filter = _.filter(this.state.heroes, hero => {
-      return hero.biography.publisher === 'Marvel Comics'
-    })
-    this.applySort(filter)
-  }
-
-  handleDcComics() {
-    const filter = _.filter(this.state.heroes, hero => {
-      return hero.biography.publisher === 'DC Comics'
-    })
-    this.applySort(filter)
-  }
-
-  handleHuman() {
-    const filter = _.filter(this.state.heroes, hero => {
-      return hero.appearance.race === 'Human'
-    })
-    this.applySort(filter)
-  }
-
-  handleGroupFilter(group) {
-    const filter = _.filter(this.state.heroes, hero => {
-      return hero.connections.groupAffiliation.includes(group)
+      return hero.connections.groupAffiliation.includes(e.value)
     })
     console.log('handleGroupFilter is being called')
     console.log(filter)
@@ -135,14 +100,16 @@ class HeroesIndex extends React.Component {
             <div className="column is-one-fifth">
 
               <div className="field">
+                <label className="label" htmlFor="search">Search</label>
                 <div className="control">
                   <input id="search" className="input" type="text" placeholder="search..." onKeyUp={this.handleKeyUp}/>
                 </div>
               </div>
 
               <div className="field">
+                <label className="label" htmlFor="sortBy">Sort By</label>
                 <div className="select">
-                  <select onChange={this.handleChange}>
+                  <select id="sortBy" onChange={this.handleChange}>
                     <option value="name|asc">Name, ascending</option>
                     <option value="name|desc">Name, descending</option>
                     <option value="powerstats.intelligence|desc">Intelligence, descending</option>
@@ -163,19 +130,27 @@ class HeroesIndex extends React.Component {
 
               <div className="field">
                 <div className="control">
-                  <button className="button" value="appearance|gender|Male" onClick={this.handleMale}>Male
+                  <label className="label" htmlFor="findGroup">Find Group</label>
+                  <Select id="findGroup" onChange={this.handleSelect} options={this.state.objectGroups} />
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label" htmlFor="filterBy">Filters</label>
+                <div className="control">
+                  <button className="button is-fullwidth" value="appearance|gender|Male" onClick={this.handleFilters}>Male
                   </button>
-                  <button className="button" value="appearance|gender|Female" onClick={this.handleFemale}>Female
+                  <button className="button is-fullwidth" value="appearance|gender|Female" onClick={this.handleFilters}>Female
                   </button>
-                  <button className="button" value="biography|alignment|good" onClick={this.handleGood}>Good
+                  <button className="button is-fullwidth" value="biography|alignment|good" onClick={this.handleFilters}>Good
                   </button>
-                  <button className="button" value="biography|alignment|bad" onClick={this.handleBad}>Bad
+                  <button className="button is-fullwidth" value="biography|alignment|bad" onClick={this.handleFilters}>Bad
                   </button>
-                  <button className="button" value="biography|publisher|Marvel Comics" onClick={this.handleMarvelComics}>Marvel Comics
+                  <button className="button is-fullwidth" value="biography|publisher|Marvel Comics" onClick={this.handleFilters}>Marvel Comics
                   </button>
-                  <button className="button" value="biography|publisher|DC Comics" onClick={this.handleDcComics}>DC Comics
+                  <button className="button is-fullwidth" value="biography|publisher|DC Comics" onClick={this.handleFilters}>DC Comics
                   </button>
-                  <button className="button" value="appearance|race|Human" onClick={this.handleHuman}>Human
+                  <button className="button is-fullwidth" value="appearance|race|Human" onClick={this.handleFilters}>Human
                   </button>
                 </div>
               </div>

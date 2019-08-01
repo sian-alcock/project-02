@@ -26,7 +26,7 @@ class HeroShow extends React.Component {
     if(!this.state.hero) return null
     return (
       <div className="tile is-ancestor">
-        <div className="tile is-vertical is-8">
+        <div className="tile is-vertical">
           <div className="tile">
             <div className="tile is-parent is-vertical">
               <article className="tile is-child notification">
@@ -69,37 +69,35 @@ class HeroShow extends React.Component {
                 </figure>
               </article>
             </div>
-          </div>
-          <div className="tile is-parent">
-            <article className="tile is-child notification">
-              <p className="title">Biography</p>
-              <div className="content">
-                <p><strong>Alter Egos: </strong>{this.state.hero.biography.alterEgos}
-                </p>
-                <p><strong>Aliases: </strong>{this.state.hero.biography.aliases}
-                </p>
-                <p><strong>Place of Birth: </strong>{this.state.hero.biography.placeOfBirth}
-                </p>
-                <p><strong>First Appearance: </strong>{this.state.hero.biography.firstAppearance}
-                </p>
-                <p><strong>Publisher: </strong>{this.state.hero.biography.publisher}
-                </p>
-                <p><strong>Alignment: </strong>{_.startCase(this.state.hero.biography.alignment)}
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-        <div className="tile is-parent">
-          <article className="tile is-child notification">
-            <div className="content">
-              <p className="title">Group Affiliation</p>
-              <div className="content">
-                <p>{this.state.hero.connections.groupAffiliation}
-                </p>
-              </div>
+            <div className="tile is-parent is-vertical">
+              <article className="tile is-child notification">
+                <p className="title">Biography</p>
+                <div className="content">
+                  <p><strong>Alter Egos: </strong>{this.state.hero.biography.alterEgos}
+                  </p>
+                  <p><strong>Aliases: </strong>{this.state.hero.biography.aliases}
+                  </p>
+                  <p><strong>Place of Birth: </strong>{this.state.hero.biography.placeOfBirth}
+                  </p>
+                  <p><strong>First Appearance: </strong>{this.state.hero.biography.firstAppearance}
+                  </p>
+                  <p><strong>Publisher: </strong>{this.state.hero.biography.publisher}
+                  </p>
+                  <p><strong>Alignment: </strong>{_.startCase(this.state.hero.biography.alignment)}
+                  </p>
+                </div>
+              </article>
+              <article className="tile is-child notification">
+                <div className="content">
+                  <p className="title">Group Affiliation</p>
+                  <div className="content">
+                    <p>{this.state.hero.connections.groupAffiliation}
+                    </p>
+                  </div>
+                </div>
+              </article>
             </div>
-          </article>
+          </div>
         </div>
       </div>
     )
