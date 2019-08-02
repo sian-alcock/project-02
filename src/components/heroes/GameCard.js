@@ -7,10 +7,11 @@ const GameCard = (props) => {
         <div className="card-header-title">{props.name}</div>
       </div>
       <div className="card-image">
-        <figure className="image imageSpin" style={{backgroundImage: `url(${props.image}`}}>
+        <figure>
+          <img className="image cardImage imageSpin" src={props.image}/>
         </figure>
       </div>
-      <div className="card-content">
+      <div className="card-content has-text-centered powerstats">
         <p className="notes"><strong>Intelligence:</strong> {props.intelligence}</p>
         <p className="notes"><strong>Strength:</strong> {props.strength}</p>
         <p className="notes"><strong>Speed:</strong> {props.speed}</p>

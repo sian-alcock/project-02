@@ -13,6 +13,7 @@ const IndexCard = (props) => {
       <div className="card-content is-family-secondary">
         <p className="notes">{props.publisher}</p>
         <p className="notes">{props.alignment}</p>
+        <a className="notes">{props.link}</a>
       </div>
     </div>
   )

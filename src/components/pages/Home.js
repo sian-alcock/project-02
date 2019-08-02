@@ -2,11 +2,10 @@ import React from 'react'
 
 const Home = () => {
   return(
-    <section id="home" className="hero is-fullheight-with-navbar">
+    <section id="home" className="hero is-fullheight">
       <div className="hero-body">
         <div className="container">
-          <img src="" className="title"/>
-          <h1 className="subtitle">Superheroes</h1>
+          <h1 className="title has-text-centered">Superheroes</h1>
         </div>
       </div>
     </section>

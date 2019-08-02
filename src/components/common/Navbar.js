@@ -24,7 +24,7 @@ class Navbar extends React.Component {
 
   render() {
     return(
-      <nav className="navbar is-fixed-top">
+      <nav className="navbar">
         <div className="container">
           <div className="navbar-brand">
             <Link to ="/" className="navbar-item"><img src="https://cdn.pixabay.com/photo/2014/04/02/10/50/superhero-304713_960_720.png"/></Link>
@@ -43,11 +43,12 @@ class Navbar extends React.Component {
           <div className={`navbar-menu ${this.state.navbarOpen ? 'is-active' : '' }`}>
             <div className="navbar-start">
               <Link to="/heroes" className="navbar-item">All Heroes</Link>
-              <Link to="/groups" className="navbar-item">Groups</Link>
               <Link to="/play" className="navbar-item">Play Game</Link>
+              <Link to="/about" className="navbar-item">About</Link>
             </div>
           </div>
         </div>
+
       </nav>
     )
   }

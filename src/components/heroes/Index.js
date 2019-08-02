@@ -95,20 +95,20 @@ class HeroesIndex extends React.Component {
   render() {
     if(!this.state.heroes) return <h2>Loading...</h2>
     return(
-      <section className="section">
+      <section className="section has-navbar-fixed-top">
         <div className="container">
           <div className="columns is-multiline">
             <div className="column is-one-fifth">
 
               <div className="field">
-                <label className="label" htmlFor="search">Search</label>
+                <label className="label has-text-white" htmlFor="search">Search</label>
                 <div className="control">
                   <input id="search" className="input" type="text" placeholder="search..." onChange={this.handleKeyUp} value={this.state.searchTerm} />
                 </div>
               </div>
 
               <div className="field">
-                <label className="label" htmlFor="sortBy">Sort By</label>
+                <label className="label has-text-white" htmlFor="sortBy">Sort By</label>
                 <div className="select">
                   <select id="sortBy" onChange={this.handleChange}>
                     <option value="name|asc">Name, ascending</option>
@@ -131,13 +131,13 @@ class HeroesIndex extends React.Component {
 
               <div className="field">
                 <div className="control">
-                  <label className="label" htmlFor="findGroup">Find Group</label>
+                  <label className="label has-text-white" htmlFor="findGroup">Find Group</label>
                   <Select id="findGroup" onChange={this.handleSelect} options={this.state.objectGroups} />
                 </div>
               </div>
 
               <div className="field">
-                <label className="label" htmlFor="filterBy">Filters</label>
+                <label className="label has-text-white" htmlFor="filterBy">Filters</label>
                 <div className="control">
                   <button className="button is-fullwidth" value="appearance|gender|Male" onClick={this.handleFilters}>Male
                   </button>

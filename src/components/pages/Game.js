@@ -25,7 +25,7 @@ class Game extends React.Component {
 
   componentDidMount() {
     axios.get('https://akabab.github.io/superhero-api/api/all.json')
-      .then(res => this.setState({ heroes: res.data}))
+      .then(res => this.setState({ heroes: res.data, playerText: 'Press Play to get your superhero character', computerText: 'Choose your best stat', resultText: 'Will you win?  Will you lose? The fate of the universe is in your hands' }))
 
   }
 
@@ -88,7 +88,7 @@ class Game extends React.Component {
   }
 
   resetGame() {
-    this.setState({playerText: ' ', computerText: ' ', resultText: ' ' })
+    this.setState({playerText: 'Press Play to get your superhero character', computerText: 'Choose your best stat', resultText: 'Will you win?  Will you lose? The fate of the universe is in your hands' })
     this.getCharacters()
   }
 
@@ -100,8 +100,8 @@ class Game extends React.Component {
         <div className="container">
           <div className="columns">
             <div className="column">
-              <button className={`button ${this.state.gameOn ? 'is-hidden' : ''}`} onClick={this.getCharacters}>Start</button>
-              <button className="button" onClick={this.resetGame}>Start Again</button>
+              <button className={`button ${this.state.gameOn ? 'is-hidden' : ''}`} onClick={this.getCharacters}>Play</button>
+              <button className={`button ${!this.state.gameOn ? 'is-hidden' : ''}`} onClick={this.resetGame}>Play Again</button>
             </div>
           </div>
           <div className="columns is-multiline">
@@ -121,7 +121,7 @@ class Game extends React.Component {
               <div className="tile is-ancestor">
                 <div className="tile">
                   <div className="tile is-parent is-vertical">
-                    <article className="tile is-child is-vertical has-text-centered notification">
+                    <article className="tile is-child is-vertical has-text-centered notification resultBoard">
                       <p id="playerPick">{this.state.playerText}</p>
                       <p id="computerPick">{this.state.computerText}</p>
                       <p id="result">{this.state.resultText}</p>
