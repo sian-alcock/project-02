@@ -24,10 +24,10 @@ class Navbar extends React.Component {
 
   render() {
     return(
-      <nav className="navbar is-fexed-top">
+      <nav className="navbar is-fixed-top">
         <div className="container">
           <div className="navbar-brand">
-            <Link to ="/" className="navbar-item">🦹‍♀️</Link>
+            <Link to ="/" className="navbar-item"><img src="https://cdn.pixabay.com/photo/2014/04/02/10/50/superhero-304713_960_720.png"/></Link>
 
             <a
               role="button"

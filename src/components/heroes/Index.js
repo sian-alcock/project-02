@@ -4,7 +4,7 @@ import axios from 'axios'
 import _ from 'lodash'
 import Select from 'react-select'
 
-import Card from './Card'
+import IndexCard from './IndexCard'
 
 class HeroesIndex extends React.Component {
   constructor() {
@@ -56,7 +56,8 @@ class HeroesIndex extends React.Component {
     const filter = _.filter(this.state.heroes, hero => {
       return hero[fieldOne][fieldTwo] === value
     })
-    this.applySort(filter)
+
+    this.setState({ searchTerm: '' }, () => this.applySort(filter))
   }
 
   handleSelect(e) {
@@ -102,7 +103,7 @@ class HeroesIndex extends React.Component {
               <div className="field">
                 <label className="label" htmlFor="search">Search</label>
                 <div className="control">
-                  <input id="search" className="input" type="text" placeholder="search..." onKeyUp={this.handleKeyUp}/>
+                  <input id="search" className="input" type="text" placeholder="search..." onChange={this.handleKeyUp} value={this.state.searchTerm} />
                 </div>
               </div>
 
@@ -164,7 +165,7 @@ class HeroesIndex extends React.Component {
                     className="column is-one-third-desktop is-half-tablet"
                   >
                     <Link to={`/heroes/${hero.id}`}>
-                      <Card
+                      <IndexCard
                         name={hero.name}
                         image={hero.images.lg}
                         publisher={hero.biography.publisher}

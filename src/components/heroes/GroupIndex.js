@@ -43,13 +43,7 @@ class GroupIndex extends React.Component {
         const objectGroups =groups.map(group => ({value: group, label: group}))
         console.log(objectGroups)
 
-        const options = [
-          {value: 'chocolate', label: 'x'},
-          {value: 'strawberry', label: 'x'},
-          {value: 'Vanilla', label: 'x'}
-        ]
-
-        this.setState({ heroes: res.data, groups, objectGroups })
+        this.setState({ heroes: res.data, filteredHeroes: res.data, groups, objectGroups })
       })
   }
 

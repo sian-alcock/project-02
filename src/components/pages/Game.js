@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import _ from 'lodash'
 
-import Card from '../heroes/Card'
+import GameCard from '../heroes/GameCard'
 
 class Game extends React.Component {
   constructor() {
@@ -15,10 +15,12 @@ class Game extends React.Component {
       computerCharacter: {
         images: {},
         powerstats: {}
-      }
+      },
+      gameOn: false
     }
     this.getCharacters = this.getCharacters.bind(this)
     this.playGame = this.playGame.bind(this)
+    this.resetGame = this.resetGame.bind(this)
   }
 
   componentDidMount() {
@@ -30,11 +32,11 @@ class Game extends React.Component {
   getCharacters() {
     const playerCharacter = _.sample(this.state.heroes)
     const computerCharacter = _.sample(this.state.heroes)
-    console.log(playerCharacter)
-    this.setState({ playerCharacter, computerCharacter })
+    this.setState({ playerCharacter, computerCharacter, gameOn: true })
   }
 
   playGame(e) {
+
     const powerStatInPlay = e.target.innerHTML.toLowerCase()
     const playerStat = this.state.playerCharacter.powerstats[powerStatInPlay]
     const playerText = `${this.state.playerCharacter.name} your ${powerStatInPlay} rating is ${playerStat}`
@@ -82,27 +84,29 @@ class Game extends React.Component {
     } else {
       resultText = 'It\'s a tie'
     }
-    this.setState({playerText, computerText, resultText})
-    //Disable all buttons
-    //Get the button value: eg. Intelligence
-    //Get value for intelligence from player and computerCharacter
-    //Compare values
-    //Report result
+    this.setState({playerText, computerText, resultText, gameOn: true})
+  }
+
+  resetGame() {
+    this.setState({playerText: ' ', computerText: ' ', resultText: ' ' })
+    this.getCharacters()
   }
 
   render() {
+    console.log(this.state)
     if(!this.state.heroes) return <h2>Loading...</h2>
     return(
       <section className="section">
         <div className="container">
           <div className="columns">
             <div className="column">
-              <button className="button" onClick={this.getCharacters}>Start</button>
+              <button className={`button ${this.state.gameOn ? 'is-hidden' : ''}`} onClick={this.getCharacters}>Start</button>
+              <button className="button" onClick={this.resetGame}>Start Again</button>
             </div>
           </div>
           <div className="columns is-multiline">
             <div className="column is-one-third-desktop">
-              <Card
+              <GameCard
                 name={this.state.playerCharacter.name}
                 image={this.state.playerCharacter.images.lg}
                 intelligence={this.state.playerCharacter.powerstats.intelligence}
@@ -114,12 +118,31 @@ class Game extends React.Component {
               />
             </div>
             <div className="column is-one-third-desktop">
-              <p id="playerPick">{this.state.playerText}</p>
-              <p id="computerPick">{this.state.computerText}</p>
-              <p id="result">{this.state.resultText}</p>
+              <div className="tile is-ancestor">
+                <div className="tile">
+                  <div className="tile is-parent is-vertical">
+                    <article className="tile is-child is-vertical has-text-centered notification">
+                      <p id="playerPick">{this.state.playerText}</p>
+                      <p id="computerPick">{this.state.computerText}</p>
+                      <p id="result">{this.state.resultText}</p>
+                    </article>
+                    <article className="tile is-child is-vertical has-text-centered notification">
+                      <h1>VS</h1>
+                    </article>
+                    <article className="tile is-child is-vertical notification">
+                      <button className="button is-fullwidth" onClick={this.playGame}>Intelligence</button>
+                      <button className="button is-fullwidth" onClick={this.playGame}>Strength</button>
+                      <button className="button is-fullwidth" onClick={this.playGame}>Speed</button>
+                      <button className="button is-fullwidth" onClick={this.playGame}>Durability</button>
+                      <button className="button is-fullwidth" onClick={this.playGame}>Power</button>
+                      <button className="button is-fullwidth" onClick={this.playGame}>Combat</button>
+                    </article>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="column is-one-third-desktop">
-              <Card
+              <GameCard
                 name={this.state.computerCharacter.name}
                 image={this.state.computerCharacter.images.lg}
                 intelligence='?'
@@ -129,16 +152,6 @@ class Game extends React.Component {
                 power='?'
                 combat='?'
               />
-            </div>
-          </div>
-          <div className="columns">
-            <div className="column">
-              <button className="button" onClick={this.playGame}>Intelligence</button>
-              <button className="button" onClick={this.playGame}>Strength</button>
-              <button className="button" onClick={this.playGame}>Speed</button>
-              <button className="button" onClick={this.playGame}>Durability</button>
-              <button className="button" onClick={this.playGame}>Power</button>
-              <button className="button" onClick={this.playGame}>Combat</button>
             </div>
           </div>
         </div>
