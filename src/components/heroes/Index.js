@@ -95,7 +95,7 @@ class HeroesIndex extends React.Component {
   render() {
     if(!this.state.heroes) return <h2>Loading...</h2>
     return(
-      <section className="section has-navbar-fixed-top">
+      <section className="section">
         <div className="container">
           <div className="columns is-multiline">
             <div className="column is-one-fifth">

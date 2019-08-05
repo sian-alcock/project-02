@@ -52,6 +52,14 @@ Launch on [GitHub Pages](link).
     * Link to your **wireframes** – sketches of major views / interfaces in your application
    * Descriptions of any **unsolved problems** or **major hurdles** your team had to overcome
 
+### General approach
+
+We agreed on superheroes as our api to consume very quickly and found a few apis to choose from.  We tested the first one which looked well documented but quite quickly established that there was no endpoint that meant we could access 'all superheroes'.  A quick search and we found the same data in a separate api on github which did have the endpoint we needed.
+
+After deciding on the api, we then drew wireframes of the index and show pages and agreed that if we had time, we would like to build a game based on 'Top trumps'.
+
+We also agreed the technologies we would like to employ including Bulma, Lodash and Axios.  We considered having user registration and log on but could not think of a good reason to include those features.
+
 ### Future proofing
 
 xxx
@@ -97,19 +105,19 @@ When either the player or the computer have destroyed all the crops, the game is
 
 ### Bugs
 
-* xx?
-
+* The sorting pull-down only works on the second selection
+* xx
 
 
 ## Wins and Blockers
 
 ### Final deliverable looks good and works well
 
-I'm happy with the final deliverable which met the brief. In a relatively short time, I have produced a game that - I believe - looks fun and is easy to navigate and play.
+We are very happy with the final deliverable which met the brief. We are particularly pleased with the look and feel of the site.
 
-### xx
+### Creating two card components
 
-
+We created a component for the card that we used to display the superhero characters eg on the Index page.  We wanted to use it in three different places.  On the game page, we wanted to apply an animation to the image but we did not want the animation to apply in the other two places.  We ended up creating a second component instead of making it work differently.
 
 ## Future Content
 
@@ -123,3 +131,4 @@ Given more time, we would like to include the following capabilities:
 
 This project was such a great learning experience.  Major learning points:
 * Storing on state in React
+* Bulma?

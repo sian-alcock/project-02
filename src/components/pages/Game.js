@@ -32,7 +32,7 @@ class Game extends React.Component {
   getCharacters() {
     const playerCharacter = _.sample(this.state.heroes)
     const computerCharacter = _.sample(this.state.heroes)
-    this.setState({ playerCharacter, computerCharacter, gameOn: true })
+    this.setState({ playerCharacter, computerCharacter, gameOn: true, result: false })
   }
 
   playGame(e) {
@@ -41,7 +41,7 @@ class Game extends React.Component {
     const playerStat = this.state.playerCharacter.powerstats[powerStatInPlay]
     const playerText = `${this.state.playerCharacter.name} your ${powerStatInPlay} rating is ${playerStat}`
     const computerStat = this.state.computerCharacter.powerstats[powerStatInPlay]
-    const computerText = `${this.state.computerCharacter.name} your ${powerStatInPlay} rating is ${computerStat}`
+    const computerText = `The ${powerStatInPlay} rating for ${this.state.computerCharacter.name} is ${computerStat}`
 
     const intelligenceWinString = 'Winner! You are the brightest spark!'
     const intelligenceLoseString = 'Loser! Your light has been extinguished!'
@@ -84,11 +84,11 @@ class Game extends React.Component {
     } else {
       resultText = 'It\'s a tie'
     }
-    this.setState({playerText, computerText, resultText, gameOn: true})
+    this.setState({playerText, computerText, resultText, gameOn: true, result: true})
   }
 
   resetGame() {
-    this.setState({playerText: 'Press Play to get your superhero character', computerText: 'Choose your best stat', resultText: 'Will you win?  Will you lose? The fate of the universe is in your hands' })
+    this.setState({playerText: 'Press Play to get your superhero character', computerText: 'Choose your best stat', resultText: 'Will you win?  Will you lose? The fate of the universe is in your hands', result: false })
     this.getCharacters()
   }
 
@@ -121,7 +121,7 @@ class Game extends React.Component {
               <div className="tile is-ancestor">
                 <div className="tile">
                   <div className="tile is-parent is-vertical">
-                    <article className="tile is-child is-vertical has-text-centered notification resultBoard">
+                    <article className={`tile is-child is-vertical has-text-centered notification ${this.state.result ? 'pulse' : ''}`}>
                       <p id="playerPick">{this.state.playerText}</p>
                       <p id="computerPick">{this.state.computerText}</p>
                       <p id="result">{this.state.resultText}</p>

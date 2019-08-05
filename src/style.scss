@@ -31,6 +31,15 @@ $family-secondary: 'Open Sans', sans-serif;
  -webkit-animation-duration: 5s;
 }
 
+@keyframes pulse {
+    0% { transform: scaleY(1); }
+    10% { transform: scaleY(1.4); }
+    20% { transform: scaleY(1.4); }
+    30% { transform: scaleY(1.4); }
+    100% { transform: scaleY(1); }
+
+}
+
 body {
   min-height: 100vh;
   background-position: center;
@@ -62,8 +71,11 @@ h1.title{
   text-shadow: 2px 2px blue;
 }
 
-.resultBoard {
-
+.pulse {
+  animation-name: pulse;
+  animation-duration: 5000ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
 }
 
 .cardImage {
@@ -74,7 +86,5 @@ h1.title{
 .notification {
   padding: 2rem 2rem 2rem 2rem;
 }
-
-
 
 @import '~bulma'
