@@ -12,7 +12,7 @@ It has been developed jointly by Michael G. Laird and Sian Alcock.
 
 Launch on [GitHub Pages](https://sian-alcock.github.io/project-01/).
 
-![Main screenshot](/src/images/screenshot-home.png)
+![Main screenshot](/src/images/Screenshot-home.png)
 
 ## Brief
 
@@ -59,30 +59,30 @@ We also agreed which technologies/packages we would like to employ including Bul
 ### Landing page
 The player is introduced to the website with an attractive welcome screen and a navigation bar.
 
-![Screenshot](/src/images/screenshot-home.png)
+![Screenshot](/src/images/Screenshot-home.png)
 
 ### Index page
 The index page is accessed from the Landing page when the user clicks 'All Heroes'.  The page displays all available superheroes, displayed in card components.
 
 This page includes searching, sorting and filtering.  It also includes a react-select component that is populated by 'affiliated groups'  The user can search and select groups to which the superheroes belong (eg Avengers).
 
-![Screenshot](/src/images/screenshot-index.png)
+![Screenshot](/src/images/Screenshot-index.png)
 
 ### Show page
 Clicking on a superhero in the index page, will display the show page for the selected superhero.
 
-![Screenshot](/src/images/screenshot-show.png)
+![Screenshot](/src/images/Screenshot-show.png)
 
 ### Game
 The game is based on Top Trumps.  The premise is that each player is dealt a card containing a superhero character listing his or her (or it's) power statistics (eg intelligence, power etc.)  The player picks a statistic to compare on by clicking a button (eg Intelligence) and the player with the highest rating for the selected statistic wins the game.
 
-![Screenshot](/src/images/screenshot-game.png)
+![Screenshot](/src/images/Screenshot-game.png)
 
 ### About page
 The About page includes a description of the application, information about the developers and acknowledgements.
 
 
-![Screenshot](/src/images/screenshot-about.png)
+![Screenshot](/src/images/Screenshot-about.png)
 
 
 ### Bugs

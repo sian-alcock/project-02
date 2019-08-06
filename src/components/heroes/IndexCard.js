@@ -7,7 +7,7 @@ const IndexCard = (props) => {
         <div className="card-header-title">{props.name}</div>
       </div>
       <div className="card-image">
-        <figure className="image" style={{backgroundImage: `url(${props.image}`}}>
+        <figure><img className="image cardImage" src={props.image}/>
         </figure>
       </div>
       <div className="card-content is-family-secondary">
