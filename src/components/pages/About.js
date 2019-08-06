@@ -8,7 +8,7 @@ const About = () => {
         <div className="box">
           <div className="content">
             <h2>About the Site</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>This site has been developed by Michael G. Laird and Sian Alcock as part of a learning module in General Assembly&lsquo;s Software Engineering Immersive Course using JavaScript and React. </p>
           </div>
         </div>
         <div className="box">
@@ -35,7 +35,7 @@ const About = () => {
         <div className="box">
           <div className="content">
             <h2>Acknowledgements</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>This site consumes an API published by GitHub user &lsquo;akabab&lsquo;. [https://akabab.github.io/superhero-api/api/]</p>
           </div>
         </div>
       </div>
