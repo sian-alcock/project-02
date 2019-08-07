@@ -10,7 +10,7 @@ It has been developed jointly by Michael G. Laird and Sian Alcock.
 ### Project duration
 48 hours.
 
-Launch on [GitHub Pages](https://sian-alcock.github.io/project-01/).
+Launch on [GitHub Pages](https://sian-alcock.github.io/project-02/).
 
 ![Main screenshot](/src/images/Screenshot-home.png)
 

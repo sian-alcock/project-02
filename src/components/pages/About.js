@@ -18,14 +18,14 @@ const About = () => {
               <div className="column is-one-quarter-desktop is-offset-one-quarter">
                 <IndexCard
                   name="Michael G. Laird"
-                  image="../../images/Michael-3.jpg"
+                  image="../../images/michael.jpg"
                   link="https://github.com/MGL1994"
                 />
               </div>
               <div className="column is-one-quarter-desktop is-offset-one-half">
                 <IndexCard
                   name="Sian Alcock"
-                  image="../../images/sian-5.jpg"
+                  image="../../images/sian.jpg"
                   link="https://github.com/sian-alcock"
                 />
               </div>
