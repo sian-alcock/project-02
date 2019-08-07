@@ -44,9 +44,7 @@ The project brief is as follows:
 
 ## Approach Taken
 
-### General approach
-
-We agreed on superheroes as our theme very quickly and found a few APIs to choose from.  We tested one but quite quickly established that there was no endpoint that meant we could access 'all superheroes'.  After a quick search, we found the same data in a separate API on GitHub which included the endpoint we needed.
+We agreed on superheroes as our theme very quickly and found a few APIs to choose from.  We tested one, but quite quickly established that there was no endpoint that meant we could access 'all superheroes'.  After a quick search, we found the same data in a separate API on GitHub which included the endpoint we needed.
 
 After deciding on the API, we drew wireframes of the index and show pages.  We agreed that if we had time, we would also like to build a game based on 'Top trumps'.
 
@@ -97,7 +95,7 @@ The About page includes a description of the application, information about the 
 
 We are very happy with the final deliverable which meets the brief. We are particularly proud of the styling.
 
-### Issue: Creating two card components
+### Blocker: Creating two card components
 
 We created a component for the card that we used to display the superhero characters eg on the Index page.  We wanted to use it in three different places.
 
@@ -107,17 +105,56 @@ We tried to find a way to only apply the animation in one place but we ended up 
 
 Ideally, there would only be a single component but the animation would only apply where needed.
 
+### Blocker: Cleaning the group affiliation data
+
+Each superhero can be assigned to one or many groups. The group data was stored as one long comma-separated string per superhero.  The challenge was to pull all the group data together into a single array that was:
+* unique
+* succinct
+* free of unnecessary punctuation / characters.
+
+```JavaScript
+componentDidMount() {
+  axios.get('https://akabab.github.io/superhero-api/api/all.json')
+    .then(res => {
+      let groups = res.data.map(hero => {
+        return hero.connections.groupAffiliation.split(', ')
+          .map(group => {
+            group = group.replace('Former', 'former')
+              .replace('Incorporated', 'Inc.')
+            const match = group.match(/[A-Z][a-zA-Z0-9 .-]+/)
+            return match ? match[0].trim() : group
+          })
+      })
+        .reduce((flattened, groupArray) => flattened.concat(groupArray), [])
+        .filter(group => group.length < 50 && group !== '-')
+        .sort()
+
+      groups = Array.from(new Set(groups))
+
+      const objectGroups =groups.map(group => ({value: group, label: group}))
+      console.log(objectGroups)
+
+      this.setState({ heroes: res.data, filteredHeroes: res.data, groups, objectGroups })
+    })
+}
+
+```
+
 ## Future Content
 
 Given more time, we would like to include the following capabilities:
+* Make more responsive for use on mobiles
 * Consume a second API to include superhero theme tunes
 * Keep score between games
+* Allow user to select their superhero character for the game
 * Make more of the groups - eg include a separate entry page
-* Devise a Superhero name generator
+* Combine the different filter methods on the index page so they work together
+* Devise a Superhero name generator.
 
 ## What we learned
 
 This project was such a great learning experience.  Major learning points:
-* Storing values in state but not setting state too often
+* Storing values in state but not setting state too often.
 * Accessing fields within the API using bracket notation so that we can build up variables using string literals.
 * The API included data on Affiliated Groups.  This data needed a lot of attention (eg to remove duplicates).  This was probably our biggest challenge.
+* Bulma is very powerful - you need to engage with the documentation to make the most of it and make it more customizable.
