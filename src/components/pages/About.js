@@ -1,5 +1,7 @@
 import React from 'react'
 import IndexCard from '../heroes/IndexCard'
+const michaelImage = '../../images/michael.jpg'
+const sianImage = '../../images/sian.jpg'
 
 const About = () => {
   return(
@@ -18,14 +20,14 @@ const About = () => {
               <div className="column is-one-quarter-desktop is-offset-one-quarter">
                 <IndexCard
                   name="Michael G. Laird"
-                  image="../../images/michael.jpg"
+                  image={michaelImage}
                   link="https://github.com/MGL1994"
                 />
               </div>
               <div className="column is-one-quarter-desktop is-offset-one-half">
                 <IndexCard
                   name="Sian Alcock"
-                  image="../../images/sian.jpg"
+                  image={sianImage}
                   link="https://github.com/sian-alcock"
                 />
               </div>
