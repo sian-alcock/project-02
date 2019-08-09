@@ -1,7 +1,7 @@
 import React from 'react'
 import IndexCard from '../heroes/IndexCard'
-const michaelImage = '../../images/michael.jpg'
-const sianImage = '../../images/sian.jpg'
+import michaelImage from '../../images/michael.jpg'
+import sianImage from '../../images/sian.jpg'
 
 const About = () => {
   return(
