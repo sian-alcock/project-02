@@ -21,6 +21,7 @@ class HeroesIndex extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
     this.handleFilters = this.handleFilters.bind(this)
+    this.truncate = this.truncate.bind(this)
 
 
   }
@@ -90,6 +91,18 @@ class HeroesIndex extends React.Component {
     const [field, order] = this.state.sortTerm.split('|')
     const sortedHeroes = _.orderBy(filteredHeroes, [field], [order])
     this.setState({filteredHeroes: sortedHeroes})
+  }
+
+  truncate(str, limit) {
+    const stringLimit = limit
+    const truncated = _.truncate(str, {length: stringLimit, separator: /,? +/, omission: ''})
+    if(str === undefined) {
+      return ''
+    } else if (stringLimit < str.length) {
+      return `${truncated} ...`
+    } else {
+      return truncated
+    }
   }
 
   render() {
