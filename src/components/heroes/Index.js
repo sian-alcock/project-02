@@ -44,7 +44,7 @@ class HeroesIndex extends React.Component {
 
         groups = Array.from(new Set(groups))
 
-        const objectGroups =groups.map(group => ({value: group, label: group}))
+        const objectGroups = groups.map(group => ({value: group, label: group}))
         console.log(objectGroups)
 
         this.setState({ heroes: res.data, filteredHeroes: res.data, groups, objectGroups })

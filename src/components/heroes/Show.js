@@ -2,8 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import _ from 'lodash'
 
-import { Link } from 'react-router-dom'
-
 
 class HeroShow extends React.Component {
 
@@ -106,10 +104,6 @@ class HeroShow extends React.Component {
       </section>
     )
   }
-
-
-
-
 }
 
 export default HeroShow

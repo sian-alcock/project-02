@@ -27,16 +27,16 @@ The project brief is as follows:
 
 ## Technologies Used
 
-* HTML5 with HTML5 audio
+* HTML5
 * CSS3
 * JavaScript (ES6)
 * React
 * Bulma
 * Lodash
-* HashRouter, Route, Switch, Link  from 'react-router-dom'
-* Select from 'react-select'
-* axios
-* ScSS
+* HashRouter, Route, Switch, Link  from React Router Dom
+* Select from React Select
+* Axios
+* SCSS
 * Git
 * GitHub
 * Google Fonts
